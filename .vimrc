@@ -25,32 +25,34 @@
     " }
 
     " General {
-        Plugin 'scrooloose/nerdtree' "A tree explorer plugin
-        Plugin 'altercation/vim-colors-solarized' "Solarized Colorscheme
-        Plugin 'spf13/vim-colors' "Collection of color schemes
-        Plugin 'tpope/vim-surround' "quoting/parenthesizing made simple
-        Plugin 'tpope/vim-repeat' "enable repeating supported plugin maps with "."
-        Plugin 'ctrlpvim/ctrlp.vim' "Fuzzy file, buffer, mru, tag, etc finder
-        Plugin 'tacahiroy/ctrlp-funky' "A simple function navigator for ctrlp.vim
-        Plugin 'terryma/vim-multiple-cursors' "True Sublime Text style multiple selections
-        Plugin 'vim-airline/vim-airline' "status/tabline
-        Plugin 'vim-airline/vim-airline-themes' "A collection of themes for vim-airline
-        Plugin 'powerline/fonts' "Patched fonts for Powerline users
-        Plugin 'easymotion/vim-easymotion' "motions on speed
-        Plugin 'jistr/vim-nerdtree-tabs' "make NERDTree and tabs together
-        Plugin 'mbbill/undotree' "The ultimate undo history visualizer
-        Plugin 'Yggdroot/indentLine' "display the indention levels with thin vertical lines
-        Plugin 'mhinz/vim-signify' "Show a diff via Vim sign column
+        Plugin 'scrooloose/nerdtree' " A tree explorer plugin
+        Plugin 'altercation/vim-colors-solarized' " Solarized Colorscheme
+        Plugin 'spf13/vim-colors' " Collection of color schemes
+        Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
+        Plugin 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
+        Plugin 'jiangmiao/auto-pairs' " insert or delete brackets, parens, quotes in pair
+        Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
+        Plugin 'tacahiroy/ctrlp-funky' " A simple function navigator for ctrlp.vim
+        Plugin 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections
+        Plugin 'matchit.zip' " extended % matching for HTML, LaTeX, and many other languages
+        Plugin 'vim-airline/vim-airline' " status/tabline
+        Plugin 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline
+        Plugin 'powerline/fonts' " Patched fonts for Powerline users
+        Plugin 'easymotion/vim-easymotion' " motions on speed
+        Plugin 'jistr/vim-nerdtree-tabs' " make NERDTree and tabs together
+        Plugin 'mbbill/undotree' " The ultimate undo history visualizer
+        Plugin 'Yggdroot/indentLine' " display the indention levels with thin vertical lines
+        Plugin 'mhinz/vim-signify' " Show a diff via Vim sign column
     " }
 
     " General Programming {
-        Plugin 'scrooloose/syntastic' "Syntax checking hacks for vim
-        Plugin 'tpope/vim-fugitive' "a Git wrapper so awesome
-        Plugin 'scrooloose/nerdcommenter' "intensely orgasmic commenting
-        Plugin 'godlygeek/tabular' "text filtering and alignment
-        Plugin 'luochen1990/rainbow' "rainbow parentheses improved
+        Plugin 'scrooloose/syntastic' " Syntax checking hacks for vim
+        Plugin 'tpope/vim-fugitive' " a Git wrapper so awesome
+        Plugin 'scrooloose/nerdcommenter' " intensely orgasmic commenting
+        Plugin 'godlygeek/tabular' " text filtering and alignment
+        Plugin 'luochen1990/rainbow' " rainbow parentheses improved
         if executable('ctags')
-            Plugin 'majutsushi/tagbar' "displays tags in a window
+            Plugin 'majutsushi/tagbar' " displays tags in a window
         endif
     " }
 
@@ -58,18 +60,47 @@
         Plugin 'tpope/vim-markdown' "Markdown runtime files
         Plugin 'saltstack/salt-vim' "working on Salt files
         Plugin 'rodjek/vim-puppet' "more Puppet friendly
+        Plugin 'evanmiller/nginx-vim-syntax' " "
         Plugin 'IndexedSearch' "shows 'Nth match out of M' at every search
         Plugin 'dantezhu/authorinfo' "add your author info
         Plugin 'nvie/vim-togglemouse' "Toggles the mouse
         Plugin 'thinca/vim-quickrun' "Run commands quickly
         Plugin 'bronson/vim-trailing-whitespace' "Highlights trailing whitespace in red
+        Plugin 'mhinz/vim-startify' "The fancy start screen
     " }
 
     " Snippets & AutoComplete {
         Plugin 'Shougo/neocomplcache' "Ultimate auto-completion system
         Plugin 'Shougo/neosnippet' "The Neosnippet plug-In adds snippet support
         Plugin 'Shougo/neosnippet-snippets' "The standard snippets repository for neosnippet
-        "Plugin 'honza/vim-snippets' "This repository contains snippets files
+        Plugin 'honza/vim-snippets' "This repository contains snippets files
+    " }
+
+    " HTML {
+        Plugin 'amirh/HTML-AutoCloseTag' " Automatically closes HTML tags
+        Plugin 'hail2u/vim-css3-syntax' " CSS3 syntax support
+        Plugin 'gorodinskiy/vim-coloresque' " css/less/sass/html color preview
+        Plugin 'tpope/vim-haml' " runtime files for Haml, Sass, and SCSS
+        Plugin 'mattn/emmet-vim' " emmet
+    " }
+
+    " Javascript {
+        Plugin 'elzr/vim-json' " A better JSON
+        Plugin 'groenewege/vim-less' " syntax for LESS (dynamic CSS)
+        Plugin 'pangloss/vim-javascript' " Vastly improved Javascript indentation and syntax
+    " }
+
+    " PHP {
+        Plugin 'spf13/PIV' " PHP Integration environment
+        Plugin 'arnaud-lb/vim-php-namespace' " types 'use' statements for you
+    " }
+
+    " Python {
+        " Pick either python-mode or pyflakes & pydoc
+        Plugin 'klen/python-mode' " PyLint, Rope, Pydoc, breakpoints from box
+        Plugin 'yssource/python.vim' " A set of menus/shortcuts to work with Python files
+        Plugin 'python_match.vim' " Extend the % motion for Python files
+        Plugin 'pythoncomplete' " Python Omni Completion
     " }
 
     if iCanHazVundle == 0
@@ -354,9 +385,21 @@
         endif
     " }
 
+    " AutoCloseTag {
+        " Make it so AutoCloseTag works for xml and xhtml files as well
+        au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+        nmap <Leader>ac <Plug>ToggleAutoCloseMappings
+    " }
+
+    " JSON {
+        nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+        let g:vim_json_syntax_conceal = 0
+    " }
+
     " NerdTree {
         if isdirectory(expand("~/.vim/bundle/nerdtree"))
             nmap <F2> :NERDTreeFind<CR>
+            map <Leader>nt <plug>NERDTreeTabsToggle<CR>
 
             let NERDTreeShowBookmarks=1
             let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -588,6 +631,36 @@
         let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
         let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
         let g:neocomplcache_omni_patterns.go = '\h\w*\.\?'
+    " }
+
+    " PIV {
+        if isdirectory(expand("~/.vim/bundle/PIV"))
+            let g:DisableAutoPHPFolding = 0
+            let g:PIVAutoClose = 0
+        endif
+    " }
+
+    " Misc {
+        if isdirectory(expand("~/.vim/bundle/nerdcommenter"))
+            let g:NERDShutUp=1
+        endif
+        if isdirectory(expand("~/.vim/bundle/matchit.zip"))
+            let b:match_ignorecase = 1
+        endif
+    " }
+
+    " PyMode {
+        " Disable if python support not present
+        if !has('python') && !has('python3')
+            let g:pymode = 0
+        endif
+
+        if isdirectory(expand("~/.vim/bundle/python-mode"))
+            let g:pymode_lint_checkers = ['pyflakes']
+            let g:pymode_trim_whitespaces = 0
+            let g:pymode_options = 0
+            let g:pymode_rope = 0
+        endif
     " }
 " }
 
